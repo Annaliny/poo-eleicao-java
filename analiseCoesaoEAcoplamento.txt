@@ -1,0 +1,25 @@
+## 1. Coesão
+SistemaEleicaoFacade (Spring Boot): Possui coesão moderada, pois gerencia tanto a lógica de negócios quanto a persistência de dados. Isso pode levar à sobrecarga (God Class).
+
+Melhoria: Extrair a lógica de persistência para serviços separados (ex: PartidoService e CandidatoService), aumentando a coesão e seguindo o Princípio da Responsabilidade Única (SRP).
+
+Gravador (Spring Boot): Alta coesão, focada exclusivamente na leitura e gravação de arquivos.
+
+Candidato e Partido (Spring Boot): Altamente coesas, representando seus próprios domínios. Focadas na manipulação de dados estruturais.
+
+Melhoria: Adicionar comportamentos como validação de dados diretamente nessas classes, aplicando o princípio "Tell, Don’t Ask".
+
+## 2. Acoplamento
+Spring Boot: Acoplamento moderado. A SistemaEleicaoFacade depende diretamente do Gravador para persistência.
+
+Melhoria: Usar mais injeção de dependência e introduzir interfaces para serviços para reduzir acoplamento.
+
+## 3. Bad Smells e Refatoração
+
+God Class Smell: A SistemaEleicaoFacade está assumindo muitas responsabilidades. Aplicar SRP para distribuir funções entre serviços.
+
+Duplicated Code Smell: Código repetido para validações de candidatos e partidos. Extrair para métodos auxiliares ou classes de utilidade.
+
+Long Method Smell: Métodos na SistemaEleicaoFacade estão longos e complexos. Usar extração de métodos para simplificá-los.
+
+Feature Envy Smell: A lógica de persistência (gravação de arquivos) está fortemente acoplada à SistemaEleicaoFacade. Desacoplar para serviços dedicados.
